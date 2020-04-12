@@ -35,8 +35,8 @@ public class LyricsCmd extends MusicCommand
     {
         super(bot);
         this.name = "lyrics";
-        this.arguments = "[song name]";
-        this.help = "shows the lyrics to the currently-playing song";
+        this.arguments = "[曲名]";
+        this.help = "流れている曲の歌詞を取得します。";
         this.aliases = bot.getConfig().getAliases(this.name);
         this.botPermissions = new Permission[]{Permission.MESSAGE_EMBED_LINKS};
         this.bePlaying = true;
@@ -55,7 +55,7 @@ public class LyricsCmd extends MusicCommand
         {
             if(lyrics == null)
             {
-                event.replyError("Lyrics for `" + title + "` could not be found!" + (event.getArgs().isEmpty() ? " Try entering the song name manually (`lyrics [song name]`)" : ""));
+                event.replyError("`" + title + "` 検索しましたが、見つかりませんでした!" + (event.getArgs().isEmpty() ? "曲名を入力してください。(`lyrics [song name]`)" : ""));
                 return;
             }
 
@@ -65,7 +65,7 @@ public class LyricsCmd extends MusicCommand
                     .setTitle(lyrics.getTitle(), lyrics.getURL());
             if(lyrics.getContent().length()>15000)
             {
-                event.replyWarning("Lyrics for `" + title + "` found but likely not correct: " + lyrics.getURL());
+                event.replyWarning("`" + title + "` は見つかりましたが、おそらく違うものです:" + lyrics.getURL());
             }
             else if(lyrics.getContent().length()>2000)
             {

@@ -55,7 +55,7 @@ public class JMusicBot
         Logger log = LoggerFactory.getLogger("Startup");
         
         // create prompt to handle startup
-        Prompt prompt = new Prompt("JMusicBot", "Switching to nogui mode. You can manually start in nogui mode by including the -Dnogui=true flag.", 
+        Prompt prompt = new Prompt("JMusicBot by RisuPu", "Switching to nogui mode. You can manually start in nogui mode by including the -Dnogui=true flag.", 
                 "true".equalsIgnoreCase(System.getProperty("nogui", "false")));
         
         // check deprecated nogui mode (new way of setting it is -Dnogui=true)
@@ -82,8 +82,8 @@ public class JMusicBot
         Bot bot = new Bot(waiter, config, settings);
         
         AboutCommand aboutCommand = new AboutCommand(Color.BLUE.brighter(),
-                                "a music bot that is [easy to host yourself!](https://github.com/jagrosh/MusicBot) (v"+version+")",
-                                new String[]{"High-quality music playback", "FairQueue™ Technology", "Easy to host yourself"},
+                                "このボットは[簡単にホストできます!](https://github.com/jagrosh/MusicBot) (v"+version+")",
+                                new String[]{"高品質の音楽再生", "FairQueue™ 技術", "簡単なホスト"},
                                 RECOMMENDED_PERMS);
         aboutCommand.setIsAuthor(false);
         aboutCommand.setReplacementCharacter("\uD83C\uDFB6"); // 🎶
@@ -175,7 +175,7 @@ public class JMusicBot
             JDA jda = new JDABuilder(AccountType.BOT)
                     .setToken(config.getToken())
                     .setAudioEnabled(true)
-                    .setGame(nogame ? null : Game.playing("loading..."))
+                    .setGame(nogame ? null : Game.playing("読み込み中..."))
                     .setStatus(config.getStatus()==OnlineStatus.INVISIBLE || config.getStatus()==OnlineStatus.OFFLINE 
                             ? OnlineStatus.INVISIBLE : OnlineStatus.DO_NOT_DISTURB)
                     .addEventListener(cb.build(), waiter, new Listener(bot))

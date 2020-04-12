@@ -33,8 +33,8 @@ public class AutoplaylistCmd extends OwnerCommand
         this.bot = bot;
         this.guildOnly = true;
         this.name = "autoplaylist";
-        this.arguments = "<name|NONE>";
-        this.help = "sets the default playlist for the server";
+        this.arguments = "<プレイリスト名|NONE>";
+        this.help = "デフォルトプレイリストを設定します。";
         this.aliases = bot.getConfig().getAliases(this.name);
     }
 
@@ -43,26 +43,26 @@ public class AutoplaylistCmd extends OwnerCommand
     {
         if(event.getArgs().isEmpty())
         {
-            event.reply(event.getClient().getError()+" Please include a playlist name or NONE");
+            event.reply(event.getClient().getError()+" 引数にプレイリスト名または、NONEと入力してください。");
             return;
         }
         if(event.getArgs().equalsIgnoreCase("none"))
         {
             Settings settings = event.getClient().getSettingsFor(event.getGuild());
             settings.setDefaultPlaylist(null);
-            event.reply(event.getClient().getSuccess()+" Cleared the default playlist for **"+event.getGuild().getName()+"**");
+            event.reply(event.getClient().getSuccess()+"**"+event.getGuild().getName()+"**を削除しました。");
             return;
         }
         String pname = event.getArgs().replaceAll("\\s+", "_");
         if(bot.getPlaylistLoader().getPlaylist(pname)==null)
         {
-            event.reply(event.getClient().getError()+" Could not find `"+pname+".txt`!");
+            event.reply(event.getClient().getError()+" `"+pname+".txt`ファイルは存在しません!");
         }
         else
         {
             Settings settings = event.getClient().getSettingsFor(event.getGuild());
             settings.setDefaultPlaylist(pname);
-            event.reply(event.getClient().getSuccess()+" The default playlist for **"+event.getGuild().getName()+"** is now `"+pname+"`");
+            event.reply(event.getClient().getSuccess()+" **"+event.getGuild().getName()+"**のデフォルトプレイリストは、`"+pname+"`になりました。");
         }
     }
 }

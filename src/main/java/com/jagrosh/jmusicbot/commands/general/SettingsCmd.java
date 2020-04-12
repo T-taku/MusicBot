@@ -37,7 +37,7 @@ public class SettingsCmd extends Command
     public SettingsCmd(Bot bot)
     {
         this.name = "settings";
-        this.help = "shows the bots settings";
+        this.help = "ボットの設定を確認できます。";
         this.aliases = bot.getConfig().getAliases(this.name);
         this.guildOnly = true;
     }
@@ -49,22 +49,22 @@ public class SettingsCmd extends Command
         MessageBuilder builder = new MessageBuilder()
                 .append(EMOJI + " **")
                 .append(FormatUtil.filter(event.getSelfUser().getName()))
-                .append("** settings:");
+                .append("** 設定:");
         TextChannel tchan = s.getTextChannel(event.getGuild());
         VoiceChannel vchan = s.getVoiceChannel(event.getGuild());
         Role role = s.getRole(event.getGuild());
         EmbedBuilder ebuilder = new EmbedBuilder()
                 .setColor(event.getSelfMember().getColor())
-                .setDescription("Text Channel: " + (tchan == null ? "Any" : "**#" + tchan.getName() + "**")
-                        + "\nVoice Channel: " + (vchan == null ? "Any" : "**" + vchan.getName() + "**")
-                        + "\nDJ Role: " + (role == null ? "None" : "**" + role.getName() + "**")
-                        + "\nCustom Prefix: " + (s.getPrefix() == null ? "None" : "`" + s.getPrefix() + "`")
-                        + "\nRepeat Mode: **" + (s.getRepeatMode() ? "On" : "Off") + "**"
-                        + "\nDefault Playlist: " + (s.getDefaultPlaylist() == null ? "None" : "**" + s.getDefaultPlaylist() + "**")
+                .setDescription("テキストチャンネル: " + (tchan == null ? "全てで使用可能" : "**#" + tchan.getName() + "**")
+                        + "\nボイスチャンネル: " + (vchan == null ? "全てで使用可能" : "**" + vchan.getName() + "**")
+                        + "\nDJロール: " + (role == null ? "なし" : "**" + role.getName() + "**")
+                        + "\nカスタムプレフィックス: " + (s.getPrefix() == null ? "なし" : "`" + s.getPrefix() + "`")
+                        + "\nリピートモード: **" + (s.getRepeatMode() ? "On" : "Off") + "**"
+                        + "\nデフォルトプレイリスト: " + (s.getDefaultPlaylist() == null ? "なし" : "**" + s.getDefaultPlaylist() + "**")
                         )
-                .setFooter(event.getJDA().getGuilds().size() + " servers | "
+                .setFooter(event.getJDA().getGuilds().size() + " サーバーに参加中 | "
                         + event.getJDA().getGuilds().stream().filter(g -> g.getSelfMember().getVoiceState().inVoiceChannel()).count()
-                        + " audio connections", null);
+                        + " 個のボイスチャンネルに接続中", null);
         event.getChannel().sendMessage(builder.setEmbed(ebuilder.build()).build()).queue();
     }
     

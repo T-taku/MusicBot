@@ -12,6 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * このコマンドは、非推奨のため、日本語化されていません。ご了承ください。 by T-taku
  */
 package com.jagrosh.jmusicbot.commands.owner;
 
@@ -33,7 +34,7 @@ public class EvalCmd extends OwnerCommand
     {
         this.bot = bot;
         this.name = "eval";
-        this.help = "evaluates nashorn code";
+        this.help = "コードを実行します";
         this.aliases = bot.getConfig().getAliases(this.name);
         this.guildOnly = false;
     }

@@ -103,15 +103,15 @@ public class BotConfig
             boolean write = false;
 
             // validate bot token
-            if(token==null || token.isEmpty() || token.equalsIgnoreCase("BOT_TOKEN_HERE"))
+            if(token==null || token.isEmpty() || token.equalsIgnoreCase("ボットのトークンをここに置いてください。"))
             {
-                token = prompt.prompt("Please provide a bot token."
-                        + "\nInstructions for obtaining a token can be found here:"
+                token = prompt.prompt("ここにトークンを設置してください。"
+                        + "\n詳しくはこちらをお読みください(英語):"
                         + "\nhttps://github.com/jagrosh/MusicBot/wiki/Getting-a-Bot-Token."
                         + "\nBot Token: ");
                 if(token==null)
                 {
-                    prompt.alert(Prompt.Level.WARNING, CONTEXT, "No token provided! Exiting.\n\nConfig Location: " + path.toAbsolutePath().toString());
+                    prompt.alert(Prompt.Level.WARNING, CONTEXT, "トークンが設定されていません。終了します。\n\n設定場所: " + path.toAbsolutePath().toString());
                     return;
                 }
                 else
@@ -125,9 +125,9 @@ public class BotConfig
             {
                 try
                 {
-                    owner = Long.parseLong(prompt.prompt("Owner ID was missing, or the provided owner ID is not valid."
-                        + "\nPlease provide the User ID of the bot's owner."
-                        + "\nInstructions for obtaining your User ID can be found here:"
+                    owner = Long.parseLong(prompt.prompt("オーナーIDが間違っているか、そのユーザーは存在しません。"
+                        + "\nここにボットの所有者にしたいユーザーのIDを置いてください"
+                        + "\nユーザーIDについてはこちらをお読みください(英語):"
                         + "\nhttps://github.com/jagrosh/MusicBot/wiki/Finding-Your-User-ID"
                         + "\nOwner User ID: "));
                 }
@@ -137,7 +137,7 @@ public class BotConfig
                 }
                 if(owner<=0)
                 {
-                    prompt.alert(Prompt.Level.ERROR, CONTEXT, "Invalid User ID! Exiting.\n\nConfig Location: " + path.toAbsolutePath().toString());
+                    prompt.alert(Prompt.Level.ERROR, CONTEXT, "ユーザーIDが取得できません! 終了します。\n\n設定場所: " + path.toAbsolutePath().toString());
                     System.exit(0);
                 }
                 else
@@ -157,7 +157,7 @@ public class BotConfig
                 else
                 {
                     bytes = original.substring(original.indexOf(START_TOKEN)+START_TOKEN.length(), original.indexOf(END_TOKEN))
-                        .replace("BOT_TOKEN_HERE", token)
+                        .replace("ボットのトークンをここに置いてください。", token)
                         .replace("0 // OWNER ID", Long.toString(owner))
                         .trim().getBytes();
                 }
@@ -167,8 +167,8 @@ public class BotConfig
                 }
                 catch(IOException ex) 
                 {
-                    prompt.alert(Prompt.Level.WARNING, CONTEXT, "Failed to write new config options to config.txt: "+ex
-                        + "\nPlease make sure that the files are not on your desktop or some other restricted area.\n\nConfig Location: " 
+                    prompt.alert(Prompt.Level.WARNING, CONTEXT, "config.txtの作成に失敗しました。 "+ex
+                        + "\nデスクトップなどの限られた場所に置いていませんか?\n\n設定場所: " 
                         + path.toAbsolutePath().toString());
                 }
             }
@@ -178,7 +178,7 @@ public class BotConfig
         }
         catch (ConfigException ex)
         {
-            prompt.alert(Prompt.Level.ERROR, CONTEXT, ex + ": " + ex.getMessage() + "\n\nConfig Location: " + path.toAbsolutePath().toString());
+            prompt.alert(Prompt.Level.ERROR, CONTEXT, ex + ": " + ex.getMessage() + "\n\n設定場所: " + path.toAbsolutePath().toString());
         }
     }
     
